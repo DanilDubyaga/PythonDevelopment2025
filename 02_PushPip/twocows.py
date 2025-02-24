@@ -95,7 +95,7 @@ parser.add_argument(
          "If not given, stdin is used instead."
 )
 parser.add_argument(
-    "message1", default=None, nargs='?',
+    "message2", default=None, nargs='?',
     help="The message to include in the speech bubble of cow2. "
          "If not given, stdin is used instead."
 )
