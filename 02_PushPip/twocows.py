@@ -100,3 +100,36 @@ parser.add_argument(
          "If not given, stdin is used instead."
 )
 args = parser.parse_args()
+
+if args.l:
+    print("\n".join(list_cows()))
+else:
+
+    cow1 = cowsay(message=args.message1,
+                  cow=args.f or "default",
+                  preset=get_preset(args),
+                  eyes=args.eyes1,
+                  tongue=args.tongue,
+                  width=args.width,
+                  wrap_text=args.n)
+
+    cow2 = cowsay(message=args.message2,
+                  cow=args.F or "default",
+                  preset=get_preset(args),
+                  eyes=args.eyes2,
+                  tongue=args.tongue,
+                  width=args.width,
+                  wrap_text=args.N)
+
+    cow1 = cow1.split('\n')
+    cow2 = cow2.split('\n')
+    l1 = len(cow1)
+    l2 = len(cow2)
+    width = max([len(s) for s in cow1])
+
+    if l1 < l2:
+        cow1 = ["" for i in range(l2-l1)] + cow1
+    else:
+        cow2 = ["" for i in range(l1 - l2)] + cow2
+    ans = "\n".join([cow1[i]+" "*(width-len(cow1[i])) + cow2[i] for i in range(max(l1, l2))])
+    print(ans)
